@@ -1,0 +1,635 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f7f9fc;
+  color: #2c3e50;
+}
+
+/* LOGIN */
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #e3f2fd, #fef9f7);
+}
+
+.login-form {
+  background-color: white;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-form h2 {
+  text-align: center;
+  color: #2c3e50;
+}
+
+.login-form input,
+.login-form button {
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 15px;
+  outline: none;
+  border: 1px solid #ccc;
+}
+
+.login-form input:focus {
+  border-color: #3498db;
+}
+
+.login-form button {
+  background-color: #3498db;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border: none;
+}
+
+.login-form button:hover {
+  background-color: #2980b9;
+}
+
+.error-text {
+  color: crimson;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+/* CALENDAR PAGE */
+.calendar-page {
+  padding: 20px;
+  background: linear-gradient(135deg, #f0f4ff, #fffaf5);
+  min-height: 100vh;
+}
+
+.calendar-header {
+  text-align: center;
+  padding: 20px 10px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  background-color: #fdfdfd;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.welcome-text {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #ff6b6b, #f39c12, #2ecc71, #3498db, #9b59b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+}
+
+.calendar-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.calendar-controls h3 {
+  font-size: 20px;
+  color: #2c3e50;
+  font-weight: bold;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.today-button {
+  background-color: #e67e22;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.today-button:hover {
+  background-color: #ca6f1e;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.filters select,
+.date-picker {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.date-picker {
+  cursor: pointer;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendar-cell {
+  min-height: 80px;
+  background-color: white;
+  padding: 6px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.calendar-cell.header {
+  background-color: #c0392b;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 14px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+}
+
+
+.calendar-cell.header:hover {
+  background-color: #c0392b;
+  transform: none;
+  opacity: 1;
+}
+
+.calendar-cell:hover {
+  background-color: #f0faff;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.calendar-cell.blank {
+  background-color: #fafafa;
+  border: none;
+  pointer-events: none;
+}
+
+.cell-date {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.appointment {
+  background-color: #3498db;
+  color: white;
+  padding: 2px 6px;
+  font-size: 12px;
+  border-radius: 6px;
+  margin: 2px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.more-appointments {
+  font-size: 12px;
+  color: #555;
+  cursor: pointer;
+  text-align: left;
+  margin-top: 2px;
+}
+
+.today-cell {
+  border: 2px solid #f39c12;
+  background-color: #fff8e1;
+}
+
+.picked-cell {
+  border: 2px dashed #16a085;
+  background-color: #e8fffa;
+}
+
+/* FORM POPUP */
+.form-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  background: white;
+  border: 2px solid crimson;
+  border-top: 10px solid crimson;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  max-width: 360px;
+  width: 90%;
+}
+
+.scroll-popup {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.scroll-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.scroll-item {
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.scroll-item button {
+  margin-top: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 6px;
+  background: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.scroll-item button:hover {
+  background: #2980b9;
+}
+
+/* APPOINTMENT FORM */
+.appointment-form h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.appointment-form label {
+  font-size: 14px;
+  margin-top: 10px;
+  display: block;
+}
+
+.appointment-form select,
+.appointment-form input {
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 12px;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.appointment-form .form-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.appointment-form .form-buttons button {
+  padding: 10px 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  color: white;
+  flex: 1;
+}
+
+.save-btn {
+  background: #27ae60;
+}
+.save-btn:hover {
+  background: #1e8449;
+}
+
+.update-btn {
+  background: #2980b9;
+}
+.update-btn:hover {
+  background: #21618c;
+}
+
+.delete-btn {
+  background: #e74c3c;
+}
+.delete-btn:hover {
+  background: #c0392b;
+}
+
+.cancel-btn {
+  background: #7f8c8d;
+}
+.cancel-btn:hover {
+  background: #626e70;
+}
+
+/* UPCOMING EVENTS */
+.upcoming-events {
+  margin-top: 40px;
+  background: #fdfdfd;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.upcoming-events h3 {
+  margin-bottom: 10px;
+}
+
+.upcoming-events ul {
+  padding-left: 18px;
+  margin: 0;
+}
+
+.upcoming-events li {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+/* DARK MODE */
+body.dark-mode {
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .calendar-page,
+body.dark-mode .calendar-header {
+  background-color: #121212 !important;
+  color: #ffffff !important;
+  border: 1px solid #444;
+}
+
+body.dark-mode .calendar-controls h3,
+body.dark-mode .calendar-header .month-title {
+  color: #ffffff !important;
+}
+
+body.dark-mode .welcome-text {
+  background: none !important;
+  color: #ffffff !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+body.dark-mode .calendar-cell {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+  border-color: #333;
+}
+
+body.dark-mode .calendar-cell.blank {
+  background-color: #181818 !important;
+}
+
+body.dark-mode .calendar-cell.header {
+  background-color: #6e1e1e !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode .appointment {
+  background-color: #9b59b6 !important;
+  color: white;
+}
+
+body.dark-mode .form-popup,
+body.dark-mode .scroll-popup,
+body.dark-mode .scroll-item {
+  background-color: #2a2a2a !important;
+  color: #fff;
+  border-color: #444;
+}
+
+body.dark-mode .appointment-form input,
+body.dark-mode .appointment-form select {
+  background-color: #333 !important;
+  color: white;
+  border: 1px solid #555;
+}
+
+body.dark-mode .today-button,
+body.dark-mode .filters select,
+body.dark-mode .date-picker {
+  background-color: #2c3e50;
+  color: white;
+  border: 1px solid #444;
+}
+
+body.dark-mode .today-button:hover {
+  background-color: #34495e;
+}
+
+body.dark-mode .upcoming-events {
+  background-color: #1c1c1c !important;
+  color: #ffffff !important;
+  border: 1px solid #333;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .upcoming-events li {
+  color: #dddddd;
+}
+
+body.dark-mode .calendar-cell:not(.header):hover {
+  background-color: #2c2c2c !important;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+.error {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 4px;
+  display: block;
+}
+/* Form Popup Dark Fix */
+body.dark-mode .form-popup {
+  background-color: #2a2a2a !important;
+  border: 2px solid #444 !important;
+  border-top: 10px solid #9b59b6 !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+/* Login Form Dark Fix */
+body.dark-mode .login-form {
+  background-color: #1f1f1f !important;
+  color: white;
+  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode .login-form input,
+body.dark-mode .login-form button {
+  background-color: #2b2b2b;
+  color: white;
+  border: 1px solid #555;
+}
+
+/* Scroll Item Fix */
+body.dark-mode .scroll-item {
+  background-color: #222 !important;
+  border: 1px solid #555;
+}
+
+/* Calendar Page */
+body.dark-mode .calendar-page {
+  background: #121212 !important;
+}
+
+/* Calendar Controls */
+body.dark-mode .calendar-controls {
+  background-color: #1a1a1a;
+  padding: 10px;
+  border-radius: 8px;
+}
+body.dark-mode .more-appointments {
+  color: #00acee !important;
+  font-weight: 600;
+}
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logout-btn {
+  background-color: #e74c3c;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #c0392b;
+}
+
+body.dark-mode .logout-btn {
+  background-color: #c0392b;
+  border: 1px solid #922b21;
+}
+
+body.dark-mode .logout-btn:hover {
+  background-color: #922b21;
+}
+
+.centered-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+
+.welcome-text {
+  font-size: 1.8rem;
+  color: #333; 
+  font-weight: 600;
+}
+
+body.dark-mode .welcome-text {
+  color: #f1f1f1; 
+}
+.mobile-calendar {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.mobile-date-picker {
+  padding: 8px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.mobile-day-card {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+body.dark-mode .mobile-day-card {
+  background-color: #2a2a2a;
+  color: #f1f1f1;
+  border: 1px solid #555;
+}
+
+.add-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background-color: #0056b3;
+}
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.logout-btn {
+  background-color: #e74c3c;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #c0392b;
+}
+
+body.dark-mode .logout-btn {
+  background-color: #c0392b;
+  border: 1px solid #922b21;
+}
+
+body.dark-mode .logout-btn:hover {
+  background-color: #922b21;
+}
